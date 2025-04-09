@@ -90,3 +90,16 @@ def plot_variable(time, variable, label, color, y_unit):
     plt.tight_layout()
     plt.show()
 
+variables = [T, sigma_brain, C_t, T_beta, sigma_serum]
+labels = [
+    "Glioma Cells (T)", 
+    "Glucose in Brain (σ_brain)", 
+    "CD8+ T Cells (C_t)", 
+    "TGF-β (T_β)", 
+    "Glucose in Serum (σ_serum)"
+]
+colors = ['blue', 'green', 'orange', 'red', 'purple']
+y_units = ["g/ml", "10^-3 g/ml", "10^-3 g/ml", "10^-3 g/ml", "10^-3 g/ml"]
+
+for variable, label, color, y_unit in zip(variables, labels, colors, y_units):
+    plot_variable(time_years, variable, label, color, y_unit)
