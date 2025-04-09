@@ -45,6 +45,7 @@ We started by replicating the original model presented in *A Mathematical Model 
 
 Our replication matched the **revised version** of their model, which included additional terms like vascularization and tumor mutational burden. However, for clarity, we **excluded those features** to isolate and examine immune interactions more directly.
 
+<img src="images/original_diagram.png" alt="Original Model Diagram" width="500"/> <img src="images/modified_diagram.png" alt="Modified Model Diagram" width="500"/>
 ---
 
 ## 🔬 Improvements in the GlioMath Model
@@ -100,6 +101,19 @@ These additions allow our model to reflect **realistic immune-tumor feedback loo
 - **TGF-β inhibition**
 - **CD8+ T cell enhancement**
 - **Combinatorial immunotherapy**
+
+---
+
+## 📊 Results
+
+### Aggressive Tumor:
+![Aggressive Tumor](images/aggressive_tumor.png)
+
+### Dormant Tumor:
+![Dormant Tumor](images/dormant_tumor.png)
+
+### Healthy Patient: 
+![Healthy Patient](images/healthy_patient.png)
 
 ---
 
