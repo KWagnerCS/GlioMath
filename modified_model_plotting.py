@@ -72,3 +72,21 @@ time_span = (0, 2988)
 # Time points for evaluation
 t_eval = np.linspace(time_span[0], time_span[1], 500)
 
+# Solve the ODEs
+solution = solve_ivp(odes, time_span, initial_conditions, args=(params,), t_eval=t_eval, method='LSODA')
+time_days = solution.t
+time_years = time_days / 322  # Convert days to years
+T, sigma_brain, C_t, T_beta, sigma_serum = solution.y
+
+# Plot the results
+def plot_variable(time, variable, label, color, y_unit):
+    plt.figure(figsize=(10, 5))
+    plt.plot(time, variable, color=color, label=label)
+    plt.title(label, fontsize=14)
+    plt.xlabel("Time (Years)", fontsize=12)
+    plt.ylabel(f"Concentration\n({y_unit})", fontsize=12)
+    plt.grid(True, linestyle='--', alpha=0.6)
+    plt.legend(fontsize=12)
+    plt.tight_layout()
+    plt.show()
+
