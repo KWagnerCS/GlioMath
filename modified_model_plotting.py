@@ -30,3 +30,36 @@ params = {
     "b_1": 0.0000057, # release rate per glioma cell
     "mu_2": 6.93, # natural death of TGF-β
 }
+
+# Define the ODE system
+def odes(t, y, params):
+    # if int(t) % 10 == 0:  # Print every 10 time units
+    #     print(f"Time: {t}, States: {y}")
+
+    T, sigma_brain, C_t, T_beta, sigma_serum = y
+    
+    # Define F(t)
+    F_t = max(params["sigma_min"], params["sigma_0"] * np.sin(6 * np.pi * t))
+
+    # F_t = params["sigma_min"]  # Test with a constant value
+
+
+    dT = (params["alpha_T"] * sigma_brain * T * (1 - T / params["K_T"]) 
+          - params["d_T"] * T 
+          - params["d_TI"] * T * (C_t - T_beta))
+    
+    dsigma_brain = (params["alpha_sigma"] * (sigma_serum - sigma_brain) 
+                    - params["d_Tsigma"] * T * sigma_brain 
+                    - (params["d_sigma_1"] + params["alpha_s"] * (params["nu"] + C_t + T_beta)) * sigma_brain)
+    
+    dC_t = ((params["a_2"] * T) / (params["k_5"] + T_beta) 
+            - params["mu_1"] * C_t 
+            - params["alpha_4"] * (T / (T + params["k_3"])) * C_t)
+    
+    dT_beta = params["s_1"] + params["b_1"] * T - params["mu_2"] * T_beta
+    
+    dsigma_serum = (params["alpha_sigma"] * (sigma_brain - sigma_serum) 
+                    + F_t - params["d_sigma_2"] * sigma_serum)
+    
+    return [dT, dsigma_brain, dC_t, dT_beta, dsigma_serum]
+
