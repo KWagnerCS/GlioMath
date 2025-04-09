@@ -63,3 +63,12 @@ def odes(t, y, params):
     
     return [dT, dsigma_brain, dC_t, dT_beta, dsigma_serum]
 
+# Initial conditions
+initial_conditions = [0, 0.000000125036105803625, 0, 9134.92063492064, 0.0000401049836139966]  
+
+# Time span (days) (2988 is 9 years at 322 days a year as per the original paper)
+time_span = (0, 2988)
+
+# Time points for evaluation
+t_eval = np.linspace(time_span[0], time_span[1], 500)
+
